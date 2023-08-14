@@ -1,47 +1,86 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!doctype html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+  <title>Admin Login</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ asset('backend/assets/login/login.css') }}">
+
+</head>
+
+<body>
+  <main>
+    <section>
+        <div class="box">
+          
+          <div class="square" style="--i:0;"></div>
+          <div class="square" style="--i:1;"></div>
+          <div class="square" style="--i:2;"></div>
+          <div class="square" style="--i:3;"></div>
+          <div class="square" style="--i:4;"></div>
+          <div class="square" style="--i:5;"></div>
+          
+         <div class="container"> 
+          <div class="form text-center"> 
+            <img src="{{ asset('backend/assets/login/logo.png') }}" width="200" alt="">
+            <h2>LOGIN</h2>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+        
+              <div class="inputBx">
+                <input id="email" type="email" name="email" required="required">
+                <span>Login</span>
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div class="inputBx password">
+                <input id="password-input" type="password" name="password" required="required">
+                <span>Password</span>
+                <a href="#" class="password-control" onclick="return show_hide_password(this);"></a>
+                <i class="fas fa-key"></i>
+              </div>
+              <label class="remember">
+                <input id="remember_me" type="checkbox" name="remember">Remember
+              </label>
+              <div class="inputBx">
+                <input type="submit" value="Log in"> 
+              </div>
+            </form>
+            <p>Forgot password? <a href="#">Click Here</a></p>
+            <p>Don't have an account <a href="#">Sign up</a></p>
+          </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+          
         </div>
+    </section>
+  </main>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+  <script>
+    function show_hide_password(target){
+        var input = document.getElementById('password-input');
+        if (input.getAttribute('type') == 'password') {
+            target.classList.add('view');
+            input.setAttribute('type', 'text');
+        } else {
+            target.classList.remove('view');
+            input.setAttribute('type', 'password');
+        }
+        return false;
+    }
+  </script>
+</body>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>
