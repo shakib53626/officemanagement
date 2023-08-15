@@ -29,7 +29,7 @@
           
          <div class="container"> 
           <div class="form text-center"> 
-            <img src="{{ asset('backend/assets/login/logo.png') }}" width="200" alt="">
+            <a href="{{ route('frontend.home') }}"><img src="{{ asset('backend/assets/login/logo.png') }}" width="200" alt=""></a>
             <h2>LOGIN</h2>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -52,8 +52,8 @@
                 <input type="submit" value="Log in"> 
               </div>
             </form>
-            <p>Forgot password? <a href="#">Click Here</a></p>
-            <p>Don't have an account <a href="#">Sign up</a></p>
+            <p>Forgot password? <a href="{{ route('password.request') }}">Click Here</a></p>
+            <p>Don't have an account <a href="{{ route('register') }}">Sign up</a></p>
           </div>
         </div>
           
